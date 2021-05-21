@@ -136,9 +136,8 @@
       </div>
       <div>
         <data-table [indexColumn]="false" [selectColumn]="true" [items]="items" [totalPages]="totalPages" [size]="size"
-          [indexColumnHeader]="'#'" [multiExpandableRows]="false" [pagination]="true" (reload)="reloadItems($event)"
-          [expandableRows]="true" (rowClick)="rowClick($event)" (rowDoubleClick)="rowDoubleClick($event)"
-          (rowSelected)="selectedRow($event)" [rowTooltip]="rowTooltip">
+          [multiExpandableRows]="false" [pagination]="true" (reload)="getData($event)" [expandableRows]="true"
+          (rowClick)="rowClick($event)" (rowSelected)="selectedRow($event)">
           <ng-template #iconExpand let-expanded="expanded">
             <span class="fa fa-lg fa-plus-circle text-success" *ngIf="!expanded"></span>
             <span class="fa fa-lg fa-minus-circle text-warning" *ngIf="expanded"></span>
@@ -152,8 +151,7 @@
             <p class="" *ngIf="itemExpand.description != null"><b>Description :</b> {{itemExpand.description}}
             </p>
           </ng-template>
-          <data-table-column [property]="'assetId'" [header]="'Asset Id'" [sortable]="true" [visible]="true"
-            [cellColors]="cellColor">
+          <data-table-column [property]="'assetId'" [header]="'Asset Id'" [sortable]="true" [visible]="true">
           </data-table-column>
           <data-table-column [property]="'name'" [header]="'Name'" [breakpoints]="'xxs,xs'" [sortable]="true">
 

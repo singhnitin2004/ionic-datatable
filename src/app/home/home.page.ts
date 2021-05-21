@@ -9,13 +9,6 @@ import { AlertController } from '@ionic/angular';
 })
 export class HomePage {
   selectAll: boolean;
-  model = {
-    asset: true,
-    name: true,
-    category: true,
-    location: true,
-    description: true
-  }
   showMoreFilterModel = [
     { name: 'Meta Data', select: false },
     { name: 'Tags', select: false },
@@ -29,14 +22,6 @@ export class HomePage {
     location: '',
     status: '',
   }
-  duplicateData: any;
-  columns = [
-    { name: "Asset ID", visible: true },
-    { name: "Name", visible: true },
-    { name: "Category", visible: true },
-    { name: "Location", visible: true },
-    { name: "Description", visible: true },
-  ];
   showSelect: boolean = false;
   showCreate: boolean = false;
   showFilter: boolean = false;
@@ -55,17 +40,16 @@ export class HomePage {
 
 
   ngOnInit(): void {
-    console.log("Home ngOnInit")
   }
 
-  reloadItems(params) {
+  //Get Initial data
+  getData(params) {
     this.itemResource.query(params).then(items => this.items = items);
     this.items.filter(i => { return i.filterFlag = false, i.showAction = false });
   }
 
-  // special properties:
+  //on row click
   async rowClick(rowEvent) {
-    console.log('Clicked: ', rowEvent);
     if (rowEvent.property.toLowerCase() !== 'action') {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
@@ -73,39 +57,20 @@ export class HomePage {
         message: 'Clicked on AssetId ' + rowEvent.row.item.assetId,
         buttons: ['Ok']
       });
-
       await alert.present();
-
-      const { role } = await alert.onDidDismiss();
-      console.log('onDidDismiss resolved with role', role);
     }
   }
 
-  rowDoubleClick(rowEvent) {
-    // alert('Double clicked: ' + rowEvent.row.item.name);
-  }
-
-  rowTooltip(item) {
-    return item.NPI;
-  }
-
-  cellColor(car) {
-    return '#fafafa';
-  }
-
-  buttonalert(param: any) {
-    alert(param);
-  }
-
+  // display delete button on selecting the row
   selectedRow(ev) {
-    console.log(ev)
     if (ev?.length > 0) {
       this.showDelete = true;
     } else {
       this.showDelete = false;
     }
-
   }
+
+  //on click the deleting button
   async DeleteRow() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -113,13 +78,10 @@ export class HomePage {
       message: 'Are you sure you want to delete?',
       buttons: ['Cancel', 'Delete']
     });
-
     await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 
+  //for reseting the filter
   resetFilter() {
     this.advanceFilter = {
       category: '',

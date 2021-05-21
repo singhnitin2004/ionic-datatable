@@ -39,7 +39,6 @@ export class DataTableRow implements OnDestroy {
   }
 
   // other:
-
   get displayIndex() {
     if (this.dataTable.pagination) {
       return this.dataTable.displayParams.page + this.index + 1;
@@ -56,6 +55,7 @@ export class DataTableRow implements OnDestroy {
   }
 
   constructor(@Inject(forwardRef(() => DataTableComponent)) public dataTable: DataTableComponent, private platform: Platform) {
+    // on reload window size
     this.platform.ready().then(() => {
       if (this.platform.width() < 450) {
         this.item.showActionMobile = true;
@@ -75,8 +75,8 @@ export class DataTableRow implements OnDestroy {
     this.selected = false;
   }
 
+  // get window size
   onResize(event) {
-    console.log(event.target.innerWidth)
     event.target.innerWidth;
     if (event.target.innerWidth < 450) {
       this.item.showActionMobile = true;

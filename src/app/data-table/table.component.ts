@@ -225,11 +225,9 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
       this.viewName = event.name;
       this.isExpandable = this.expandable();
     });
-    console.log("Sasas")
   }
 
   // init
-
   ngOnInit() {
     this._initDefaultValues();
     this._initDefaultClickEvents();
@@ -353,10 +351,12 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
     this._onSelectAllChanged(value);
   }
 
+  // all row selected
   private _onSelectAllChanged(value: boolean) {
     this.rows.toArray().forEach(row => row.selected = value);
   }
 
+  // row selected with checkbox
   onRowSelectChanged(row: DataTableRow) {
     // maintain the selectedRow(s) view
     if (this.multiSelect) {

@@ -14,49 +14,55 @@ export class DataTablePagination implements OnInit {
   constructor(@Inject(forwardRef(() => DataTableComponent)) public dataTable: DataTableComponent) {
   }
 
+  //init
   ngOnInit(): void {
     this.totalPageButtons();
   }
 
+  // direct redirect page
   setPageNumber(setPage: number) {
     this.dataTable.currentPage = setPage;
     this.dataTable.page = this.dataTable.currentPage;
     this.totalPageButtons();
   }
 
+  // previous
   pageBack() {
     this.dataTable.currentPage = this.dataTable.currentPage - 1;
     this.dataTable.page = this.dataTable.currentPage;
     this.totalPageButtons();
   }
 
+  // next
   pageForward() {
     this.dataTable.currentPage = this.dataTable.currentPage + 1;
     this.dataTable.page = this.dataTable.currentPage;
     this.totalPageButtons();
   }
 
+  // first page
   pageFirst() {
     this.dataTable.page = 0;
     this.dataTable.currentPage = 0;
     this.totalPageButtons();
   }
 
+  //last page
   pageLast() {
     this.dataTable.page = this.dataTable.totalPages - 1;
     this.dataTable.currentPage = this.dataTable.totalPages - 1;
     this.totalPageButtons();
   }
 
+  //get total page
   totalPageButtons(): void {
     this.pages = this.getPaginationButtons(this.dataTable.currentPage + 1);
-    console.log(this.pages)
   }
 
+  //get total page
   getPaginationButtons(page: number): PaginationButton[] {
     const pages = [];
     const total = this.dataTable.totalPages;
-    // document.getElementById('drpSelectSourceLibrary').value = this.dataTable.totalPages.toString();
     let startPage = 1;
     let endPage = total;
     const maxSize = 5;
@@ -75,7 +81,6 @@ export class DataTablePagination implements OnInit {
     }
 
     for (let num = startPage; num <= endPage; num++) {
-      console.log(num)
       pages.push(new PaginationButton(num, num - 1, num === page));
       if (num == 5) {
         pages.push(new PaginationButton('...', num - 1, false));
