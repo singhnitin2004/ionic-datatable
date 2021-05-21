@@ -1,0 +1,49 @@
+<div class="pagination-box">
+  <div class="pagination-range">
+    {{dataTable.translations.paginationRange}}:
+    <!-- <span [textContent]="dataTable.page + 1"></span>
+    <span [textContent]="[dataTable.page + dataTable.size , dataTable.totalPages] | min"></span>
+    /
+    <span [textContent]="dataTable.totalPages"></span> -->
+    <select id="drpSelectSourceLibrary">
+      <option value="5">5</option>
+      <option value="10" selected>10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+    </select>
+  </div>
+  <div class="pagination-controllers">
+    <div class="dataTables_paginate paging_bs_normal">
+      <ul class="pagination pagination-sm">
+        <!-- <li class="page-item" [ngClass]="{'disabled': dataTable.currentPage == 0}">
+          <a href="javascript:void(0)" class="page-link" (click)="pageFirst()"><i
+              class="{{dataTable.icons.paginationFirst}}"></i></a>
+        </li> -->
+        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == 0}">
+          <a href="javascript:void(0)" class="link-cus" (click)="pageBack()"><i
+              class="{{dataTable.icons.paginationPrevius}}"
+              style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>
+        </li>
+        <li *ngFor='let page of pages' class="page-item" [ngClass]="{'active-page': page.active}">
+          <a href="javascript:void(0)" class="link-cus" (click)="setPageNumber(page.page)">{{page.label}}</a>
+        </li>
+        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == dataTable.totalPages - 1}">
+          <a href="javascript:void(0)" class="link-cus" (click)="pageForward()"><i
+              class="{{dataTable.icons.paginationNext}}"
+              style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>
+        </li>
+        <!-- <li class="page-item" [ngClass]="{'disabled': dataTable.currentPage == dataTable.totalPages - 1}">
+          <a href="javascript:void(0)" class="page-link" (click)="pageLast()"><i
+              class="{{dataTable.icons.paginationLast}}"></i></a>
+        </li> -->
+        <li class="prev-next">
+          <span style="margin: 10px;">Go to page</span><input type="number" style="width: 40px;min-width: 40px;"> <span
+            style="color:red;margin: 10px;">Go</span><a href="javascript:void(0)" class="link-cus"><i
+              class="{{dataTable.icons.paginationNext}}"
+              style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

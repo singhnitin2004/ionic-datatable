@@ -52,8 +52,6 @@ export class AppComponent {
 
   constructor(private http: HttpClient, private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef, public alertController: AlertController) {
     this.renderer.listen('window', 'click', (e: any) => {
-      console.log(this.showMoreFilterModel)
-      console.log(e.target.className)
       if (e.target.className.indexOf('md hydrated') == -1) {
         if (this.posts) {
           this.CloseAllSideMenuToggle(this.posts);
@@ -215,7 +213,7 @@ export class AppComponent {
   onResize(event) {
     console.log(event.target.innerWidth)
     event.target.innerWidth;
-    if (event.target.innerWidth < 1000) {
+    if (event.target.innerWidth < 700) {
       this.showExpand = true;
     } else {
       this.showExpand = false;

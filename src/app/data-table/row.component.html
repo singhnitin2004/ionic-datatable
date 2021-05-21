@@ -1,0 +1,95 @@
+<tr class="" [title]="getTooltip()" [style.background-color]="dataTable.getRowColor(item, index, getThisElement())"
+  [class.row-odd]="index % 2 === 0" [class.row-even]="index % 2 === 1" [class.selected]="selected"
+  (window:resize)="onResize($event)" [class.rowSelected]="rowSelected" [class.clickable]="dataTable.selectOnRowClick"
+  (dblclick)="dataTable.rowDoubleClicked(getThisElement(), $event)">
+  <td [hidden]="!dataTable.isExpandable" class="row-expand-button">
+    <span (click)="expand();">
+      <span *ngIf="dataTable.iconExpand" [ngTemplateOutlet]="dataTable.iconExpand"
+        [ngTemplateOutletContext]="{expanded: expanded}">
+      </span>
+      <span *ngIf="!dataTable.iconExpand">
+        <span class="expandColumn circle" *ngIf="!expanded">
+          <i class="fa fa-plus"></i>
+        </span>
+        <span class="expandColumn circle" *ngIf="expanded">
+          <i class="fa fa-minus"></i>
+        </span>
+      </span>
+    </span>
+  </td>
+  <td [hidden]="!dataTable.indexColumnVisible" class="index-column" [textContent]="displayIndex"></td>
+  <td [hidden]="!dataTable.selectColumnVisible" class="select-column">
+    <div class="md-checkbox">
+      <input id="index-clumn{{displayIndex}}" type="checkbox" [(ngModel)]="selected" />
+      <label for="index-clumn{{displayIndex}}"></label>
+    </div>
+  </td>
+  <td *ngFor="let column of dataTable.columns" [hidden]="dataTable.columnVisibility(column)"
+    (click)="dataTable.rowClicked(getThisElement(), $event,column.property)" (mouseenter)="item.showAction=true;"
+    (mouseleave)="item.showAction=false;" [ngClass]="column.styleClassObject" class="data-column"
+    [style.background-color]="column.getCellColor(getThisElement, index)">
+    <div *ngIf="!column.cellTemplate && column.property !='Action'" class="show-limited-char">{{item[column.property]}}
+    </div>
+    <div *ngIf="!column.cellTemplate && column.property =='Action'" style="min-width: 112px;">
+      <span *ngIf="item.showAction || item.showActionMobile">
+        <button class="view-button">
+          <ion-icon name="eye-outline" class="view-icon"></ion-icon>
+          View
+        </button>
+        <button class="more-button" (click)="item.filterFlag = !item.filterFlag" (focusout)="item.filterFlag = false">
+          <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-horizontal"></ion-icon>
+        </button>
+        <div *ngIf="item?.filterFlag" style="margin-top: 10px;"
+          class="position-absolute rounded shadow-sm border custom-side-menu-toggle Side-toggle-Menu-No-Close">
+          <p class="border-bottom Side-toggle-Menu-No-Close">
+            <b>
+              <ion-icon name="create-outline" style="position: absolute;left:0;margin-left: 10px;margin-right: 10px;">
+              </ion-icon>
+              Edit
+            </b>
+          </p>
+          <p class="Side-toggle-Menu-No-Close border-bottom">
+            <b>
+              <ion-icon name="copy-outline" style="position: absolute;left:0;margin-left: 10px;margin-right: 10px;">
+              </ion-icon>
+              Duplicate
+            </b>
+          </p>
+          <p class="Side-toggle-Menu-No-Close color-red">
+            <b>
+              <ion-icon name="trash-outline" style="position: absolute;left:0;margin-left: 10px;margin-right: 10px;">
+              </ion-icon>
+              Delete
+            </b>
+          </p>
+        </div>
+      </span>
+    </div>
+    <div *ngIf="column.cellTemplate" [ngTemplateOutlet]="column.cellTemplate"
+      [ngTemplateOutletContext]="{column: column, row: getThisElement, item: item}"></div>
+  </td>
+</tr>
+<tr *ngIf="dataTable.expandableRows" [hidden]="!expanded" class="row-expansion">
+  <td [attr.colspan]="dataTable.columnCount" *ngIf="!dataTable.expandTemplate" class="collapse-td-table">
+    <table class="collapse-table-size">
+
+      <tbody *ngFor="let column of dataTable.columns" class="collapse-table-body">
+
+        <th [hidden]="!dataTable.columnVisibility(column)" class="collapse-th-size">
+          {{column.header}}
+        </th>
+        <td [hidden]="!dataTable.columnVisibility(column)" class="collapse-td-size">
+          <div *ngIf="!column.cellTemplate && column.property !='Action'" class="show-limited-char">
+            {{item[column.property]}}</div>
+          <div *ngIf="!column.cellTemplate && column.property =='Action'"></div>
+          <div *ngIf="column.cellTemplate" [ngTemplateOutlet]="column.cellTemplate"
+            [ngTemplateOutletContext]="{column: column, row: getThisElement, item: item}"></div>
+        </td>
+      </tbody>
+    </table>
+  </td>
+  <td [attr.colspan]="dataTable.columnCount" *ngIf="dataTable.expandTemplate">
+    <div [ngTemplateOutlet]="dataTable.expandTemplate"
+      [ngTemplateOutletContext]="{row: getThisElement, itemExpand: itemExpand}"></div>
+  </td>
+</tr>

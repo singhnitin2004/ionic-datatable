@@ -1,4 +1,7 @@
-<ion-header [translucent]="true">
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Ionic-Datatable
@@ -9,19 +12,6 @@
 
   <div class="no-padding" style="padding: 10px;margin-bottom:10vh;">
     <div>
-      <!-- <div class="float-right">
-        <ion-button class="display-botton" (click)="showSelect = !showSelect;" color="danger">
-          <ion-icon class="mr-5" name="caret-down-outline"></ion-icon>
-          Display
-        </ion-button>
-        <div *ngIf="showSelect"
-          class="position-absolute rounded shadow-sm border custom-side-menu-toggle Side-toggle-Menu-No-Close float-right">
-          <p class="border-bottom checkbox-class Side-toggle-Menu-No-Close" *ngFor="let item of columns">
-            <input type="checkbox" class="checkbox-class" [(ngModel)]='item.visible' (change)="selectColumn(item)">
-            {{item.name}}
-          </p>
-        </div>
-      </div> -->
       <div class="float-right">
         <ion-button class="extra-botton create-botton" color="danger" (click)="showCreate = !showCreate;">
           <ion-icon class="mr-5" name="add-circle-outline"></ion-icon>
@@ -78,7 +68,6 @@
           </ion-select>
         </ion-item>
         <ion-item class="date" color="light">
-          <!-- <ion-label position="floating">Date</ion-label> -->
           <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Date" [(ngModel)]="advanceFilter.date" min="1994-03-14"
             max="2012-12-09"></ion-datetime>
         </ion-item>
@@ -246,4 +235,4 @@
       </div>
     </div>
   </div>
-</ion-content>
+</ion-content> -->

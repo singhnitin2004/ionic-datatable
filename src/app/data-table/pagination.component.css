@@ -1,0 +1,115 @@
+.pagination-box {
+  position: relative;
+  margin-top: -10px;
+}
+.pagination-range {
+  margin-top: 7px;
+  margin-left: 3px;
+  margin-bottom: 7px;
+  display: inline-block;
+}
+.pagination-controllers {
+  float: right;
+}
+.pagination-controllers input {
+  min-width: 60px;
+  /*padding: 1px 0px 0px 5px;*/
+  text-align: right;
+}
+
+.pagination-limit {
+  margin-right: 25px;
+  display: inline-table;
+  width: 150px;
+}
+.pagination-pages {
+  display: inline-block;
+}
+.pagination-page {
+  width: 110px;
+  display: inline-table;
+}
+.pagination-box button {
+  outline: none !important;
+}
+.pagination-prevpage,
+.pagination-nextpage,
+.pagination-firstpage,
+.pagination-lastpage {
+  vertical-align: top;
+}
+.pagination-reload {
+  color: gray;
+  font-size: 12px;
+}
+.page-item{
+    color: hsl(194deg 17% 74%) !important;
+    background: transparent;
+    border-radius: 30px;
+    padding: 2px 8px;
+    height: 28px;
+    margin: 3px;
+}
+.active-page{
+    color: #fff !important;
+    border: 1px solid hsl(196deg 93% 16%);
+    background: hsl(196deg 93% 16%);
+    border-radius: 30px;
+    padding: 2px 8px;
+    height: 28px;
+    margin: 3px;
+}
+.link-cus{
+  text-decoration: none !important;
+  color: hsl(194deg 17% 74%) !important;
+}
+.disabled{
+  pointer-events: none;
+}
+
+:host ::ng-deep .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #fff !important;
+    border: 1px solid #EE3124;
+    background: #EE3124;
+    border-radius: 30px;
+    padding: 5px 10px;
+}
+:host ::ng-deep .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: 1px solid #EE3124;
+    background-color: #EE3124;
+    background: #EE3124;
+    border-radius: 30px;
+}
+.prev-next{
+  color: hsl(194deg 17% 74%);
+    padding: 2px 8px;
+    height: 28px;
+    margin: 3px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.pagination{
+   display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    
+}
+@media only screen and (max-width: 770px){
+  .pagination{
+        margin: auto !important;
+        width: 85% !important;
+  }
+  }
+
+
