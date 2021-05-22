@@ -1,7 +1,4 @@
-import { Component, Renderer2, ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { Component } from '@angular/core';
 declare var $: any;
 @Component({
   selector: 'app-root',
@@ -9,7 +6,7 @@ declare var $: any;
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private http: HttpClient, private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef, public alertController: AlertController) {
+  constructor() {
   }
 
   ngOnInit(): void {

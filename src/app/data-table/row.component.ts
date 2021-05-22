@@ -33,7 +33,9 @@ export class DataTableRow implements OnDestroy {
     const columns = this.dataTable.columns.filter(column => this.dataTable.columnVisibility(column));
     this._itemExpand = {};
     columns.forEach(value => {
-      this._itemExpand[value.property] = this.item[value.property];
+      if (value.visible) {
+        this._itemExpand[value.property] = this.item[value.property];
+      }
     });
     return this._itemExpand;
   }
@@ -73,6 +75,12 @@ export class DataTableRow implements OnDestroy {
 
   ngOnDestroy() {
     this.selected = false;
+  }
+
+  actionSelected(type, row) {
+    this.dataTable.actionSelect.emit({ type, row });
+    this.item.filterFlag = false;
+    this.item.showAction = false;
   }
 
   // get window size

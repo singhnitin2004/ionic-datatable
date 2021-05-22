@@ -55,12 +55,10 @@
 
 .custom-side-menu-toggle {
   z-index: 5;
-  position: fixed;
+  position: absolute !important;
   background-color: #fff;
   box-shadow: 5px 5px 5px 5px #8888886e;
     border-radius: 5px;
-
-  
 }
 .custom-side-menu-toggle p {
     padding: 9px 30px !important;

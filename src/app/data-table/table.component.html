@@ -27,15 +27,17 @@
                     (click)="showSelect = !showSelect;">
                   </ion-icon>
                 </button>
-                <div *ngIf="showSelect" style="margin: 37px 0px 0px 4px;"
-                  class="position-absolute rounded display-option shadow-sm border custom-side-menu-toggle Side-toggle-Menu-No-Close float-right">
-                  <p class="border-bottom checkbox-class Side-toggle-Menu-No-Close md-checkbox"
-                    *ngFor="let item of columns;let i=index">
-                    <span class="md-checkbox"><input id="shivam{{i}}" type="checkbox" class="checkbox-class"
-                        [(ngModel)]='item.visible' style="vertical-align: middle;" (change)="selectColumn(item)">
-                      {{item.header}}
-                      <label for="shivam{{i}}"></label></span>
-                  </p>
+                <div *ngIf="showSelect" style="display: flex;justify-content: flex-end;">
+                  <div style="margin: 37px 0px 0px 4px;right: 107 !important;"
+                    class="position-absolute rounded display-option shadow-sm border custom-side-menu-toggle Side-toggle-Menu-No-Close float-right">
+                    <p class="border-bottom checkbox-class Side-toggle-Menu-No-Close md-checkbox"
+                      *ngFor="let item of columns;let i=index" [hidden]="item.header == 'Action'">
+                      <span class="md-checkbox"><input id="shivam{{i}}" type="checkbox" class="checkbox-class"
+                          [(ngModel)]='item.visible' style="vertical-align: middle;">
+                        {{item.header}}
+                        <label for="shivam{{i}}" class="checkbox-class"></label></span>
+                    </p>
+                  </div>
                 </div>
               </span>
               <span *ngIf="column.headerTemplate" [ngTemplateOutlet]="column.headerTemplate"

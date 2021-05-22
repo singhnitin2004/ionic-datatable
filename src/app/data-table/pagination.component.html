@@ -5,11 +5,12 @@
     <span [textContent]="[dataTable.page + dataTable.size , dataTable.totalPages] | min"></span>
     /
     <span [textContent]="dataTable.totalPages"></span> -->
-    <select id="drpSelectSourceLibrary">
+    <select id="drpSelectSourceLibrary" [(ngModel)]="totalSizes" (ngModelChange)="sizeChange()">
       <option value="5">5</option>
-      <option value="10" selected>10</option>
-      <option value="15">15</option>
-      <option value="20">20</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
     </select>
   </div>
   <div class="pagination-controllers">
@@ -19,15 +20,18 @@
           <a href="javascript:void(0)" class="page-link" (click)="pageFirst()"><i
               class="{{dataTable.icons.paginationFirst}}"></i></a>
         </li> -->
-        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == 0}">
+        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == 1}">
           <a href="javascript:void(0)" class="link-cus" (click)="pageBack()"><i
               class="{{dataTable.icons.paginationPrevius}}"
               style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>
         </li>
-        <li *ngFor='let page of pages' class="page-item" [ngClass]="{'active-page': page.active}">
-          <a href="javascript:void(0)" class="link-cus" (click)="setPageNumber(page.page)">{{page.label}}</a>
+        <li *ngFor='let page of pages;let i=index' class="page-item" [ngClass]="{'active-page': page.active}">
+          <a href="javascript:void(0)" *ngIf="page.label > 0" class="link-cus"
+            (click)="setPageNumber(page.label-1)">{{page.label}}</a>
+          <a href="javascript:void(0)" *ngIf="page.label < 0" class="link-cus"
+            (click)="setPageNumber(pages[i-1].label+1)">...</a>
         </li>
-        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == dataTable.totalPages - 1}">
+        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == dataTable.totalPages}">
           <a href="javascript:void(0)" class="link-cus" (click)="pageForward()"><i
               class="{{dataTable.icons.paginationNext}}"
               style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>
@@ -37,13 +41,13 @@
               class="{{dataTable.icons.paginationLast}}"></i></a>
         </li> -->
         <li class="prev-next">
-          <span style="margin: 10px;">Go to page</span><input type="number" style="width: 40px;min-width: 40px;"> <span
-            style="color:red;margin: 10px;">Go</span><a href="javascript:void(0)" class="link-cus"><i
+          <span style="margin: 10px;">Go to page</span><input type="number" [(ngModel)]="enterPage"
+            (keyup.enter)="EnterPage()" style="width: 40px;min-width: 40px;"> <a href="javascript:void(0)"
+            class="link-cus" (click)="EnterPage()"><span style="color:red;margin: 10px;">Go</span><i
               class="{{dataTable.icons.paginationNext}}"
               style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>
         </li>
       </ul>
-
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import {
-  Component, ContentChild, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges,
+  Component, ContentChild, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges,
   TemplateRef,
   ViewChildren
 } from '@angular/core';
@@ -68,7 +68,7 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
 
   @Input() classTable = 'table-condensed table-bordered';
   // add new
-  @Input() totalPages = 0;
+  @Input() totalRecords = 0;
   @Input() currentPage = 0;
 
   // Ouputs
@@ -81,6 +81,9 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
   @Output() headerClick = new EventEmitter();
   @Output() cellClick = new EventEmitter();
   @Output() rowSelected = new EventEmitter();
+  @Output() actionSelect = new EventEmitter();
+  @Output() sortOrder = new EventEmitter();
+  @Output() paginationChange = new EventEmitter();
   viewName = '';
 
   breakPointSub = new Subscription();
@@ -220,11 +223,19 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
     });
   }
 
-  constructor(private breakpointsService: BreakpointsService) {
+  constructor(private breakpointsService: BreakpointsService, private renderer: Renderer2) {
     this.breakPointSub = this.breakpointsService.changes.subscribe((event: BreakpointEvent) => {
       this.viewName = event.name;
       this.isExpandable = this.expandable();
     });
+    this.renderer.listen('window', 'click', (e: any) => {
+      if (e.target.className.indexOf('action-button') == -1) {
+        if (e.target.className.indexOf('checkbox-class') != -1 || e.target.className.indexOf('checkbox-class') == 0) {
+        } else {
+          this.showSelect = false;
+        }
+      }
+    })
   }
 
   // init
@@ -322,6 +333,7 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
     if (column.sortable) {
       const ascending = this.sortBy === column.property ? !this.sortAsc : true;
       this.sort(column.property, ascending);
+      this.sortOrder.emit({ property: column.property, sort: ascending ? 'asc' : 'desc' })
     }
   }
 
@@ -337,8 +349,13 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
   }
 
   public getRowColor(item: any, index: number, row: DataTableRow) {
-    if (this.rowColors !== undefined) {
-      return (<RowCallback>this.rowColors)(item, row, index);
+    // if (this.rowColors !== undefined) {
+    //   return (<RowCallback>this.rowColors)(item, row, index);
+    // }
+    if (index % 2 == 0) {
+      return 'hsl(0deg 0% 100%)'
+    } else {
+      return 'hsl(0deg 0 % 98 %)'
     }
   }
 

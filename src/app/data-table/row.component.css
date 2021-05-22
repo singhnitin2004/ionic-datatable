@@ -91,7 +91,8 @@ table tr td{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 17ch;
+    /* max-width: 29ch; */
+    max-width: 20vh;
   }
 
 

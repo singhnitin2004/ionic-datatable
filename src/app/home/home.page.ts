@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { DataTableResource } from '../data-table/data-table.module';
 import persons from './data-table-demo';
 import { AlertController } from '@ionic/angular';
@@ -32,10 +32,15 @@ export class HomePage {
   itemResource = new DataTableResource(persons);
   items = [];
   itemCount = 0;
-  totalPages = 9;
+  totalRecords = 92;
   size = 10;
 
-  constructor(public alertController: AlertController) {
+  constructor(public alertController: AlertController, private renderer: Renderer2,) {
+    this.renderer.listen('window', 'click', (e: any) => {
+      if (e.target.className.indexOf('plus-button') == -1) {
+        this.showMoreFilter = false;
+      }
+    })
   }
 
 
@@ -96,5 +101,33 @@ export class HomePage {
       { name: 'QR Logo', select: false },
       { name: 'Custom Field', select: false },
     ]
+  }
+
+  openAction(ev) {
+    switch (ev.type) {
+      case 'view':
+        console.log('View Button CLicked')
+        break;
+      case 'edit':
+        console.log('Edit Button CLicked')
+        break;
+      case 'duplicate':
+        console.log('Duplicate Button CLicked')
+        break;
+      case 'delete':
+        console.log('Delete Button CLicked')
+        break;
+      default:
+        break;
+    }
+    console.log(ev.row)
+  }
+
+  Sorting(ev) {
+    console.log("Sorting : ", ev)
+  }
+
+  changePagination(ev) {
+    console.log("Pagination : ", ev)
   }
 }

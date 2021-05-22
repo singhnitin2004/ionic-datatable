@@ -9,7 +9,7 @@
     <div class="container container-fluid">
       <div>
         <div style="float: left;margin: -2px 2px 10px 20px;">
-          <h3>Assets <b class="color-red">(90)</b></h3>
+          <h3>Assets <b class="color-red">(92)</b></h3>
         </div>
         <div class="float-right">
           <ion-button class="extra-botton create-botton" color="danger" (click)="showCreate = !showCreate;">
@@ -135,9 +135,11 @@
         </div>
       </div>
       <div>
-        <data-table [indexColumn]="false" [selectColumn]="true" [items]="items" [totalPages]="totalPages" [size]="size"
-          [multiExpandableRows]="false" [pagination]="true" (reload)="getData($event)" [expandableRows]="true"
-          (rowClick)="rowClick($event)" (rowSelected)="selectedRow($event)">
+        <data-table [indexColumn]="false" [selectColumn]="true" [items]="items" [totalRecords]="totalRecords"
+          [size]="size" [multiExpandableRows]="false" [pagination]="true" (reload)="getData($event)"
+          [expandableRows]="true" (rowClick)="rowClick($event)" (rowSelected)="selectedRow($event)"
+          (actionSelect)="openAction($event)" (sortOrder)="Sorting($event)"
+          (paginationChange)="changePagination($event)">
           <ng-template #iconExpand let-expanded="expanded">
             <span class="fa fa-lg fa-plus-circle text-success" *ngIf="!expanded"></span>
             <span class="fa fa-lg fa-minus-circle text-warning" *ngIf="expanded"></span>
@@ -147,14 +149,15 @@
             <p class="" *ngIf="itemExpand.category != null"><b>Category
                 :</b>{{itemExpand.category}}
             </p>
-            <p class="" *ngIf="itemExpand.location != null"><b>location :</b> {{itemExpand.location}}</p>
+            <p class="" *ngIf="itemExpand.location != null"><b>location :</b>
+              {{itemExpand.location}}</p>
             <p class="" *ngIf="itemExpand.description != null"><b>Description :</b> {{itemExpand.description}}
             </p>
           </ng-template>
           <data-table-column [property]="'assetId'" [header]="'Asset Id'" [sortable]="true" [visible]="true">
           </data-table-column>
-          <data-table-column [property]="'name'" [header]="'Name'" [breakpoints]="'xxs,xs'" [sortable]="true">
-
+          <data-table-column [property]="'name'" [header]="'Name'" [breakpoints]="'xxs,xs'" [visible]="true"
+            [sortable]="true">
           </data-table-column>
           <data-table-column [property]="'category'" [header]="'Category'" [breakpoints]="'xxs,xs'" [sortable]="true"
             [visible]="true">

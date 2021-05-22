@@ -30,32 +30,33 @@
     [style.background-color]="column.getCellColor(getThisElement, index)">
     <div *ngIf="!column.cellTemplate && column.property !='Action'" class="show-limited-char">{{item[column.property]}}
     </div>
-    <div *ngIf="!column.cellTemplate && column.property =='Action'" style="min-width: 112px;">
+    <div *ngIf="!column.cellTemplate && column.property =='Action'"
+      style="min-width: 112px;max-width: 112px;width: 112px;">
       <span *ngIf="item.showAction || item.showActionMobile">
-        <button class="view-button">
+        <button class="view-button" (click)="actionSelected('view',item)">
           <ion-icon name="eye-outline" class="view-icon"></ion-icon>
           View
         </button>
-        <button class="more-button" (click)="item.filterFlag = !item.filterFlag" (focusout)="item.filterFlag = false">
+        <button class="more-button" (click)="item.filterFlag = !item.filterFlag">
           <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-horizontal"></ion-icon>
         </button>
         <div *ngIf="item?.filterFlag" style="margin-top: 10px;"
           class="position-absolute rounded shadow-sm border custom-side-menu-toggle Side-toggle-Menu-No-Close">
-          <p class="border-bottom Side-toggle-Menu-No-Close">
+          <p class="border-bottom Side-toggle-Menu-No-Close" (click)="actionSelected('edit',item)">
             <b>
               <ion-icon name="create-outline" style="position: absolute;left:0;margin-left: 10px;margin-right: 10px;">
               </ion-icon>
               Edit
             </b>
           </p>
-          <p class="Side-toggle-Menu-No-Close border-bottom">
+          <p class="Side-toggle-Menu-No-Close border-bottom" (click)="actionSelected('duplicate',item)">
             <b>
               <ion-icon name="copy-outline" style="position: absolute;left:0;margin-left: 10px;margin-right: 10px;">
               </ion-icon>
               Duplicate
             </b>
           </p>
-          <p class="Side-toggle-Menu-No-Close color-red">
+          <p class="Side-toggle-Menu-No-Close color-red" (click)="actionSelected('delete',item)">
             <b>
               <ion-icon name="trash-outline" style="position: absolute;left:0;margin-left: 10px;margin-right: 10px;">
               </ion-icon>
@@ -88,7 +89,7 @@
       </tbody>
     </table>
   </td>
-  <td [attr.colspan]="dataTable.columnCount" *ngIf="dataTable.expandTemplate">
+  <td [attr.colspan]="dataTable.columnCount" *ngIf="dataTable.expandTemplate && (itemExpand | json) != '{}'">
     <div [ngTemplateOutlet]="dataTable.expandTemplate"
       [ngTemplateOutletContext]="{row: getThisElement, itemExpand: itemExpand}"></div>
   </td>
