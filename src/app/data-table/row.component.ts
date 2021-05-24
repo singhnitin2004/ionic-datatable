@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Inject, Input, NgZone, OnDestroy, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, NgZone, OnDestroy, Output, ViewChild } from '@angular/core';
 import { DataTableComponent } from './table.component';
 import { Platform } from '@ionic/angular';
 
@@ -13,11 +13,13 @@ export class DataTableRow implements OnDestroy {
   @Input() index: number;
   _itemExpand = {};
   expanded: boolean;
+  @ViewChild('myIdentifier')
+  myIdentifier: ElementRef;
 
   // row selection:
   public rowSelected = false;
   private _selected: boolean;
-
+  maxWidth: number = 300
   @Output() selectedChange = new EventEmitter();
 
   get selected() {
@@ -59,7 +61,7 @@ export class DataTableRow implements OnDestroy {
   constructor(@Inject(forwardRef(() => DataTableComponent)) public dataTable: DataTableComponent, private platform: Platform) {
     // on reload window size
     this.platform.ready().then(() => {
-      if (this.platform.width() < 450) {
+      if (this.platform.width() < 450 || this.platform.is('mobile') || this.platform.is('mobileweb') || this.platform.is('tablet') || this.platform.is('ipad')) {
         this.item.showActionMobile = true;
       } else {
         this.item.showActionMobile = false;
@@ -86,11 +88,13 @@ export class DataTableRow implements OnDestroy {
   // get window size
   onResize(event) {
     event.target.innerWidth;
-    if (event.target.innerWidth < 450) {
-      this.item.showActionMobile = true;
-    } else {
-      this.item.showActionMobile = false;
-    }
+    setTimeout(() => {
+      if (this.platform.width() < 450 || this.platform.is('mobile') || this.platform.is('mobileweb') || this.platform.is('tablet') || this.platform.is('ipad')) {
+        this.item.showActionMobile = true;
+      } else {
+        this.item.showActionMobile = false;
+      }
+    }, 100);
   }
 
   public getThisElement(): DataTableRow {

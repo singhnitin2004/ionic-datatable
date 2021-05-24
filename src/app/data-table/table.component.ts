@@ -294,7 +294,11 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
   public rowClicked(row: DataTableRow, event, property?) {
     this.rows.map(item => item.rowSelected = false);
     row.rowSelected = true;
-    this.rowClick.emit({ row, event, property });
+    if (property?.toLowerCase() == 'action') {
+
+    } else {
+      this.rowClick.emit({ row, event, property });
+    }
   }
 
   public rowDoubleClicked(row: DataTableRow, event) {

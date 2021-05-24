@@ -1,10 +1,10 @@
 <tr class="" [title]="getTooltip()" [style.background-color]="dataTable.getRowColor(item, index, getThisElement())"
   [class.row-odd]="index % 2 === 0" [class.row-even]="index % 2 === 1" [class.selected]="selected"
   (window:resize)="onResize($event)" [class.rowSelected]="rowSelected" [class.clickable]="dataTable.selectOnRowClick"
-  (dblclick)="dataTable.rowDoubleClicked(getThisElement(), $event)">
-  <td [hidden]="!dataTable.isExpandable" class="row-expand-button">
+  style="height: 45px;" (dblclick)="dataTable.rowDoubleClicked(getThisElement(), $event)">
+  <td [hidden]="!dataTable.isExpandable && (itemExpand | json) == '{}'" class="row-expand-button ">
     <span (click)="expand();">
-      <span *ngIf="dataTable.iconExpand" [ngTemplateOutlet]="dataTable.iconExpand"
+      <span *ngIf="dataTable.iconExpand && (itemExpand | json) != '{}'" [ngTemplateOutlet]="dataTable.iconExpand"
         [ngTemplateOutletContext]="{expanded: expanded}">
       </span>
       <span *ngIf="!dataTable.iconExpand">
@@ -26,9 +26,10 @@
   </td>
   <td *ngFor="let column of dataTable.columns" [hidden]="dataTable.columnVisibility(column)"
     (click)="dataTable.rowClicked(getThisElement(), $event,column.property)" (mouseenter)="item.showAction=true;"
-    (mouseleave)="item.showAction=false;" [ngClass]="column.styleClassObject" class="data-column"
-    [style.background-color]="column.getCellColor(getThisElement, index)">
-    <div *ngIf="!column.cellTemplate && column.property !='Action'" class="show-limited-char">{{item[column.property]}}
+    (mouseleave)="item.showAction=false;" [ngClass]="column.styleClassObject" class="data-column " #myIdentifier
+    [style.background-color]="column.getCellColor(getThisElement, index)" style="max-width: 25vw;">
+    <div *ngIf="!column.cellTemplate && column.property !='Action'" class="show-limited-char">
+      {{item[column.property]}}
     </div>
     <div *ngIf="!column.cellTemplate && column.property =='Action'"
       style="min-width: 112px;max-width: 112px;width: 112px;">

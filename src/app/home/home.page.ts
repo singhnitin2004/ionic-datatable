@@ -55,15 +55,13 @@ export class HomePage {
 
   //on row click
   async rowClick(rowEvent) {
-    if (rowEvent.property.toLowerCase() !== 'action') {
-      const alert = await this.alertController.create({
-        cssClass: 'my-custom-class',
-        header: 'Click',
-        message: 'Clicked on AssetId ' + rowEvent.row.item.assetId,
-        buttons: ['Ok']
-      });
-      await alert.present();
-    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Click',
+      message: 'Clicked on AssetId ' + rowEvent.row.item.assetId,
+      buttons: ['Ok']
+    });
+    await alert.present();
   }
 
   // display delete button on selecting the row

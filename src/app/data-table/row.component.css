@@ -87,13 +87,17 @@ table tr td{
   background: #F5F5F5;
 }
   .show-limited-char{
-    display: inline-block;
+    /* display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* max-width: 29ch; */
-    max-width: 20vh;
+    max-width: 25vw; */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
+  
 
 
   .no-padding{
@@ -151,3 +155,4 @@ border-bottom: 1px solid #a9a9a978;
 .custom-side-menu-toggle p:hover {
     background-color: #eee;
   } 
+

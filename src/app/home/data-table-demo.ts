@@ -14,7 +14,7 @@ export default [
     "assetId": "02",
     "name": "Rust Creek",
     "category": "Rooms",
-    "location": "Drama porta nibh venenatis cras sed felis eget velit. porta nibh venenatis cras sed felis eget velit. porta nibh venenatis cras sed felis eget velit. ",
+    "location": "Drama porta nibh venenatis cras sed felis eget velit. porta nibh venenatis cras sed felis eget velit. porta nibh venenatis cras sed felis eget velit Drama porta nibh venenatis cras sed felis eget velit. porta nibh venenatis cras sed felis eget velit. porta nibh venenatis cras sed felis eget velit. ",
     "description": "Lorem Ipsum"
   },
   {
