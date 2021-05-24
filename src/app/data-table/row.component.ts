@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, NgZone, OnDestroy, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, NgZone, OnDestroy, Output, Renderer2, ViewChild } from '@angular/core';
 import { DataTableComponent } from './table.component';
 import { Platform } from '@ionic/angular';
 
@@ -58,7 +58,7 @@ export class DataTableRow implements OnDestroy {
     return '';
   }
 
-  constructor(@Inject(forwardRef(() => DataTableComponent)) public dataTable: DataTableComponent, private platform: Platform) {
+  constructor(@Inject(forwardRef(() => DataTableComponent)) public dataTable: DataTableComponent, private platform: Platform, private renderer: Renderer2) {
     // on reload window size
     this.platform.ready().then(() => {
       if (this.platform.width() < 450 || this.platform.is('mobile') || this.platform.is('mobileweb') || this.platform.is('tablet') || this.platform.is('ipad')) {
@@ -67,6 +67,11 @@ export class DataTableRow implements OnDestroy {
         this.item.showActionMobile = false;
       }
     });
+    this.renderer.listen('window', 'click', (e: any) => {
+      if (e.target.className.indexOf('md hydrated') == -1) {
+        this.item.filterFlag = false
+      }
+    })
 
   }
 
