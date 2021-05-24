@@ -26,12 +26,12 @@
               style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>
         </li>
         <li *ngFor='let page of pages;let i=index' class="page-item" [ngClass]="{'active-page': page.active}">
-          <a href="javascript:void(0)" *ngIf="page.label > 0" class="link-cus"
+          <a href="javascript:void(0)" *ngIf="(page.label > 0)" class="link-cus"
             (click)="setPageNumber(page.label-1)">{{page.label}}</a>
-          <a href="javascript:void(0)" *ngIf="page.label < 0" class="link-cus"
+          <a href="javascript:void(0)" *ngIf="(page.label < 0)" class="link-cus"
             (click)="setPageNumber(pages[i-1].label+1)">...</a>
         </li>
-        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == dataTable.totalPages}">
+        <li class="prev-next" [ngClass]="{'disabled': (dataTable.currentPage+1) == pageCount}">
           <a href="javascript:void(0)" class="link-cus" (click)="pageForward()"><i
               class="{{dataTable.icons.paginationNext}}"
               style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>

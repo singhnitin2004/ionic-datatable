@@ -14,9 +14,9 @@
               <label for="selectAllCheckboxHeader"></label>
             </div>
           </th>
-          <th *ngFor="let column of columns" #th [hidden]="columnVisibility(column)" [class.sortable]="column.sortable"
-            [class.resizable]="column.resizable" [ngClass]="column.styleClassObject" class="column-header"
-            [style.width]="column.width | px">
+          <th resizable *ngFor="let column of columns" #th [hidden]="columnVisibility(column)" style="min-width: 13vh;"
+            [class.sortable]="column.sortable" [class.resizable]="column.resizable" [ngClass]="column.styleClassObject"
+            class="column-header c" [style.width.px]="column.width">
             <span (click)="headerClicked(column, $event)" [ngClass]="{'column-header-show-icon':column.sortable}">
               <span *ngIf="!column.headerTemplate && column.header !='Action'"
                 style="color: #02394D;">{{column.header}}</span>
@@ -54,8 +54,8 @@
             <span *ngIf="column.headerTemplateExtra" [ngTemplateOutlet]="column.headerTemplateExtra"
               [ngTemplateOutletContext]="{column: column}">
             </span>
-            <span *ngIf="column.resizable" class="column-resize-handle"
-              (mousedown)="resizeColumnStart($event, column, th)"></span>
+            <span class="column-resize-handle" (mousedown)="resizeColumnStart($event, column, th)">
+            </span>
           </th>
         </tr>
       </thead>

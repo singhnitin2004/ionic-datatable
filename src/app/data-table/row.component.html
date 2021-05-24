@@ -27,7 +27,7 @@
   <td *ngFor="let column of dataTable.columns" [hidden]="dataTable.columnVisibility(column)"
     (click)="dataTable.rowClicked(getThisElement(), $event,column.property)" (mouseenter)="item.showAction=true;"
     (mouseleave)="item.showAction=false;" [ngClass]="column.styleClassObject" class="data-column " #myIdentifier
-    [style.background-color]="column.getCellColor(getThisElement, index)" style="max-width: 25vw;">
+    style="max-width: 25vw;">
     <div *ngIf="!column.cellTemplate && column.property !='Action'" class="show-limited-char">
       {{item[column.property]}}
     </div>

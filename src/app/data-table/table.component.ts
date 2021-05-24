@@ -412,7 +412,7 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
     return Array.from({ length: this.displayParams.size - this.items.length });
   }
 
-  private resizeColumnStart(event: MouseEvent, column: ColumnDirective, columnElement: HTMLElement) {
+  public resizeColumnStart(event: MouseEvent, column: ColumnDirective, columnElement: HTMLElement) {
     this._resizeInProgress = true;
 
     drag(event, {
@@ -426,8 +426,7 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
 
   private _isResizeInLimit(columnElement: HTMLElement, dx: number) {
     if ((dx < 0 && (columnElement.offsetWidth + dx) <= this.resizeLimit) ||
-      !columnElement.nextElementSibling || // resizing doesn't make sense for the last visible column
-      (dx >= 0 && ((<HTMLElement>columnElement.nextElementSibling).offsetWidth + dx) <= this.resizeLimit)) {
+      !columnElement.nextElementSibling) {
       return false;
     }
     return true;

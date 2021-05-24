@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MinPipe } from './utils/min';
 import { DataTablePagination } from './pagination.component';
@@ -42,7 +42,8 @@ export * from './utils/break-points.service';
     MinPipe,
     PixelConverter,
     DataTablePagination,
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DataTableModule {
   static forRoot(): ModuleWithProviders<DataTableModule> {

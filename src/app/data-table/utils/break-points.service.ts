@@ -57,7 +57,7 @@ export function breakpointsProvider(breakpoints: BreakpointConfig = defaultBreak
 }
 
 
-@Injectable()
+// @Injectable()
 export class BreakpointsService {
 
   private lastBreakpoint: string = null;

@@ -5,7 +5,6 @@
 </ion-header>
 <ion-content>
   <div class="ion-padding">
-
     <div class="container container-fluid">
       <div>
         <div style="float: left;margin: -2px 2px 10px 20px;">
@@ -24,7 +23,8 @@
               Create Asset
             </p>
             <p class="border-bottom Side-toggle-Menu-No-Close font-size-18" style="font-size: 18px !important;">
-              <ion-icon name="arrow-down-circle-outline" class="color-red" style="margin: 0px 0px -3px 0px;"></ion-icon>
+              <ion-icon name="arrow-down-circle-outline" class="color-red" style="margin: 0px 0px -3px 0px;">
+              </ion-icon>
               Import Assets
             </p>
           </div>
@@ -54,8 +54,8 @@
         <div *ngIf="showFilter" class="filter" style="clear: both;margin: 0px 0px 20px 10px;padding-top: 18px;">
           <ion-item class="category" color="light">
             <ion-label>Category</ion-label>
-            <ion-select multiple="true" cancelText="Cancel" interface="popover" (ionChange)="changeCategory();"
-              [(ngModel)]="advanceFilter.category" okText="Okay!" mode="ios">
+            <ion-select multiple="true" cancelText="Cancel" interface="popover" [(ngModel)]="advanceFilter.category"
+              okText="Okay!" mode="ios">
               <ion-select-option value="Rooms">Rooms</ion-select-option>
               <ion-select-option value="Racks">Racks</ion-select-option>
               <ion-select-option value="Cages">Cages</ion-select-option>
@@ -93,8 +93,7 @@
           </ion-item>
           <ion-item class="location" color="light" *ngFor="let item of showMoreFilterModel" [hidden]="!item.select">
             <ion-label>{{item.name}}</ion-label>
-            <ion-select cancelText="Cancel" interface="popover" [(ngModel)]="advanceFilter.asdasd" okText="Okay!"
-              mode="ios">
+            <ion-select cancelText="Cancel" interface="popover" okText="Okay!" mode="ios">
               <ion-select-option value="Active">Active</ion-select-option>
               <ion-select-option value="Inactive">Inactive</ion-select-option>
               <ion-select-option value="Applied">Applied</ion-select-option>
@@ -163,10 +162,10 @@
             [visible]="true">
           </data-table-column>
           <data-table-column [property]="'location'" [header]="'Location'" [breakpoints]="'xxs,xs,sm'" [sortable]="true"
-            [resizable]="true" [visible]="true">
+            [visible]="true">
           </data-table-column>
           <data-table-column [property]="'description'" [header]="'Description'" [breakpoints]="'xxs,xs,sm'"
-            [sortable]="true" [resizable]="true" [visible]="true">
+            [sortable]="true" [visible]="true">
           </data-table-column>
           <data-table-column [property]="'Action'" [header]="'Action'" [sortable]="false" [visible]="true">
           </data-table-column>

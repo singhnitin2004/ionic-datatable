@@ -79,3 +79,14 @@
 :host ::ng-deep table tbody tr:nth-child(2n) {
   background: white;
 } 
+.column-resize-handle{
+float: right;
+padding: 10px 0px 10px 16px;
+margin-right: -14px;
+  cursor: col-resize;
+    user-select: none;
+}
+.column-resize-handle :hover{
+    cursor: col-resize;
+    user-select: none;
+}

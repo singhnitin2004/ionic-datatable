@@ -34,7 +34,6 @@ export class HomePage {
   itemCount = 0;
   totalRecords = 92;
   size = 10;
-
   constructor(public alertController: AlertController, private renderer: Renderer2,) {
     this.renderer.listen('window', 'click', (e: any) => {
       if (e.target.className.indexOf('plus-button') == -1) {
@@ -42,7 +41,6 @@ export class HomePage {
       }
     })
   }
-
 
   ngOnInit(): void {
   }

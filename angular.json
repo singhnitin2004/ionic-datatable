@@ -19,6 +19,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "showCircularDependencies": false,
             "assets": [
               {
                 "glob": "**/*",
@@ -174,6 +175,7 @@
     }
   },
   "cli": {
+    "analytics": "61c0f338-8353-49bd-b8ef-2029b814e68d",
     "defaultCollection": "@ionic/angular-toolkit"
   },
   "schematics": {

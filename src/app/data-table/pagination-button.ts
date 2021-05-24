@@ -1,6 +1,6 @@
 export class PaginationButton {
 
-  public label: string;
+  public label: any;
   public page: number;
   public active: boolean;
 
