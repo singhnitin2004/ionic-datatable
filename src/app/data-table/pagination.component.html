@@ -20,7 +20,7 @@
           <a href="javascript:void(0)" class="page-link" (click)="pageFirst()"><i
               class="{{dataTable.icons.paginationFirst}}"></i></a>
         </li> -->
-        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == 1}">
+        <li class="prev-next" [ngClass]="{'disabled': dataTable.currentPage == 0}">
           <a href="javascript:void(0)" class="link-cus" (click)="pageBack()"><i
               class="{{dataTable.icons.paginationPrevius}}"
               style="zoom: 1.5;color: hsl(196deg 93% 16%);font-weight: bolder;"></i></a>

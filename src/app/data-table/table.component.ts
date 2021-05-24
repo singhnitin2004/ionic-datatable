@@ -1,8 +1,11 @@
 import {
   Component, ContentChild, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges,
   TemplateRef,
-  ViewChildren
+  ViewChild,
+  ViewChildren,
+  ChangeDetectorRef
 } from '@angular/core';
+
 import { DataTableIcons, DataTableParams, DataTableTranslations, defaultIcons, defaultTranslations, RowCallback } from './types';
 import { ColumnDirective } from './column.directive';
 import { DataTableRow } from './row.component';
@@ -222,8 +225,7 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
       this.reloadItems();
     });
   }
-
-  constructor(private breakpointsService: BreakpointsService, private renderer: Renderer2) {
+  constructor(private breakpointsService: BreakpointsService, private renderer: Renderer2, public cdf: ChangeDetectorRef) {
     this.breakPointSub = this.breakpointsService.changes.subscribe((event: BreakpointEvent) => {
       this.viewName = event.name;
       this.isExpandable = this.expandable();
@@ -236,6 +238,7 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
         }
       }
     })
+
   }
 
   // init
@@ -250,6 +253,8 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
   }
 
 
+
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes !== undefined) {
       this.isExpandable = this.expandable();
@@ -260,11 +265,15 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
     if (this.columns === undefined || this.columns == null) {
       return false;
     }
-    const v = this.columns.find(column => this.columnVisibility(column));
+    const v = this.columns.find(column => this.columnVisibie(column));
     if (v !== undefined) {
       return true;
     }
     return false;
+  }
+
+  checkedBox(ev) {
+    this.isExpandable = this.expandable();
   }
 
   collapseAllExpanded(row: DataTableRow) {
@@ -275,6 +284,20 @@ export class DataTableComponent implements DataTableParams, OnInit, OnDestroy, O
         }
       });
     }
+  }
+
+  columnVisibie(column: ColumnDirective): boolean {
+    if (!this.expandableRows) {
+      return false;
+    }
+    if (!column.visible) {
+      return false;
+    }
+    if ((column.breakpoints === undefined || column.breakpoints === null || column.breakpoints === '')) {
+      return false;
+    }
+    const breakpoints = column.breakpoints.split(',');
+    return !(breakpoints.findIndex(item => item === this.viewName) === -1 ? true : false);
   }
 
   public columnVisibility(column: ColumnDirective): boolean {

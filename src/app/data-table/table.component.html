@@ -3,7 +3,8 @@
     <table class="table {{classTable}}">
       <thead>
         <tr>
-          <th [hidden]="!isExpandable" class="expand-column-header" width="10px"></th>
+          <th [hidden]="!isExpandable" class="expand-column-header" width="10px">
+          </th>
           <th [hidden]="!indexColumnVisible" class="index-column-header">
             <span [textContent]="indexColumnHeader"></span>
           </th>
@@ -33,7 +34,7 @@
                     <p class="border-bottom checkbox-class Side-toggle-Menu-No-Close md-checkbox"
                       *ngFor="let item of columns;let i=index" [hidden]="item.header == 'Action'">
                       <span class="md-checkbox"><input id="shivam{{i}}" type="checkbox" class="checkbox-class"
-                          [(ngModel)]='item.visible' style="vertical-align: middle;">
+                          [(ngModel)]='item.visible' style="vertical-align: middle;" (change)="checkedBox($event)">
                         {{item.header}}
                         <label for="shivam{{i}}" class="checkbox-class"></label></span>
                     </p>
